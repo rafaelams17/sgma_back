@@ -28,14 +28,14 @@ export class ModuloController {
     return this.moduloService.findOne(id);
   }
 
+  @Get('aluno/:id') // rota get para buscar um único módulo específico desse aluno
+  async findModulesForOneStudent(@Param('id') id: string){
+    return this.moduloService.findModulesForOneStudent(id);
+  }
+
   @Get('total/') // rota get para calcular o total de módulos
   async totalModulos(){
     return this.moduloService.totalModulos();
-  }
-
-  @Get('aluno/:id')
-  async findModulesForOneStudent(@Param('id') id: string){
-    return this.moduloService.findModulesForOneStudent(id);
   }
 
   // localhost:3000/1 = 1 é o id precisa de um nome
@@ -43,5 +43,4 @@ export class ModuloController {
   async update(@Param('id') id: string, @Body() data: ModuloDTO) {
     return this.moduloService.update(id, data);
   }
-
 }

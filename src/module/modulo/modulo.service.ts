@@ -8,11 +8,14 @@ export class ModuloService {
 
   // cria um módulo
   async create(data: ModuloDTO) {
+    // console.log(data);
+
     // verificar se o módulo já foi criado
     const moduloExists = await this.prisma.modulo.findFirst({
       // procure um modulo onde o nome é igual ao nome que está no bd
       where: {
         nome: data.nome,
+        id_aluno: data.id_aluno, // para cadastrar o módulo neste aluno
       },
     });
 
@@ -35,6 +38,7 @@ export class ModuloService {
     return this.prisma.modulo.findMany();
   }
 
+  // retornar um módulo específico
   async findOne(id: string) {
     return this.prisma.modulo.findUnique({
       where: {
@@ -43,6 +47,7 @@ export class ModuloService {
     });
   }
 
+  // retornar um módulo específico desse aluno
   async findModulesForOneStudent(id: string) {
     return this.prisma.modulo.findMany({
       where: {
@@ -51,8 +56,8 @@ export class ModuloService {
     })
   }
 
+  // somar a quantidade de módulos cadastrados
   async totalModulos() {
-    // somar a quantidade de módulos cadastrados
     return this.prisma.modulo.count();
   }
 
