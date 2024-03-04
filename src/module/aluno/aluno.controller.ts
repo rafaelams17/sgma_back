@@ -10,21 +10,22 @@ import {
 import { AlunoDTO } from './aluno.dto';
 import { AlunoService } from './aluno.service';
 
-@Controller('aluno')
+@Controller('alunos')
 export class AlunoController {
   constructor(private readonly alunoService: AlunoService) {}
 
-  @Post() // rota post
+  // alunos
+  @Post() 
   async create(@Body() data: AlunoDTO) {
     return this.alunoService.create(data);
   }
 
-  @Get() // rota get
+  @Get() 
   async findAll() {
     return this.alunoService.findAll();
   }
-
-  @Get('unico/:id')
+  // alunos/busca-um/id
+  @Get('busca-um/:id')
   async findOne(@Param('id') id: string){
     return this.alunoService.findOne(id);
   }
